@@ -14,21 +14,21 @@ ASSUMPTIONS:
 
 
 BUILD INSTRUCTIONS:
-Create constants – ROWS and SEATS to represent the dimensions of the theater. (Allows for generalization)
-Create 2D array of size ROWS x SEATS initialized with 0s.
-Parse input file specified in first command line arg.
-For all items parsed from input file, process request by finding first open seats.
-    Searching back to front, left to right, accounting for separation.
-When seats are found, update 2D array with 1s in the respective locations.
-Write to output file with results
-(Optionally print 2D list for visual representation)
-Print full path to output file.
+* Create constants – ROWS and SEATS to represent the dimensions of the theater. (Allows for * generalization)
+* Create 2D array of size ROWS x SEATS initialized with 0s.
+* Parse input file specified in first command line arg.
+* For all items parsed from input file, process request by finding first open seats.
+    - Searching back to front, left to right, accounting for separation.
+* When seats are found, update 2D array with 1s in the respective locations.
+* Write to output file with results
+* (Optionally print 2D list for visual representation)
+* Print full path to output file.
 
 
 OTHER METHODS:
-Search middle rows first, filling towards the back, then fill towards the front.
+* Search middle rows first, filling towards the back, then fill towards the front.
     (This method assumes the middle section is the most sought after, followed by the back, then the front)
-Sort requests by party size, adding big parties first before considering smaller parties. 
+* Sort requests by party size, adding big parties first before considering smaller parties. 
     (Optimization for revenue)
 
 
