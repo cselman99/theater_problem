@@ -84,21 +84,17 @@ def getSeats(pair):
     # * Starting from the beginning of that row, check for next available seat (space by 3's)
     if len(pair) != 2:
         raise ValueError('Invalid input file format')
-        quit()
 
     num = int(pair[1])
     
     # Iterate over the rows starting back to front
     for x in range(len(mapTheater)-1, -1, -2):
         y = 0
-        
         # Starting with the leftmost seat, start traversing the aisle
         while y < len(mapTheater[x])-num+1:
             counter = 0
-
             # If empty seat found, check following seats for needed space
             if mapTheater[x][y] == 0:
-
                 err = False
                 while(counter < num):
                     if mapTheater[x][y + counter] == 1: # Came across a filled seat
@@ -123,6 +119,10 @@ def getSeats(pair):
                     
     return None
 
+# Consider:
+# Seats are broken
+# Aisle separates seats (no need for 3 seat buffer in given row)
+# Different shaped theaters (varying number of seats in each row)
 
 def resetSeating():
     for x in range(len(mapTheater)):

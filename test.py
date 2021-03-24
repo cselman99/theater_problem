@@ -16,6 +16,21 @@ class TestSeatingFunctions(unittest.TestCase):
         self.assertEqual(theater.getSeats(['R002', '9']), 'R002 J12, J13, J14, J15, J16, J17, J18, J19, J20\n')
         self.assertEqual(theater.getSeats(['R003', '2']), 'R003 H1, H2\n')
 
+    def test_getSeats3(self):
+        theater.resetSeating()
+        with self.assertRaises(ValueError):
+            theater.getSeats(['R001'])
+
+        with self.assertRaises(ValueError):
+            theater.getSeats([' 3'])
+
+        with self.assertRaises(ValueError):
+            theater.getSeats([])
+
+        with self.assertRaises(ValueError):
+            theater.getSeats(['R001 3 4 2'])
+
+
     def test_input(self):
         # * Test generic input file
         theater.resetSeating()

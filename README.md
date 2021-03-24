@@ -33,6 +33,6 @@ Sort requests by party size, adding big parties first before considering smaller
 
 
 RUN INSTRUCTIONS:
-python3 theater.py path
+python3 driver.py path
 * NOTE: path argument is the destination of the reservations file *
-View "output.txt" for listed results, and terminal for grid view of seating chart
+View "output.txt" for listed results, and terminal for grid view of seating chart and testing results
