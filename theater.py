@@ -24,6 +24,7 @@
 # R003 J1, J2, J3, J4
 
 # -------------------------------------------------------------------- #
+import os
 import sys
 import string
 
@@ -33,6 +34,7 @@ SEATS = 20
 
 mapTheater = [[0]*SEATS for s in range(ROWS)]
 rows = string.ascii_uppercase[:ROWS]
+reservations = set()
 
 TICKET_PRICE = 20
 
@@ -40,17 +42,21 @@ def run(inFile):
     with open(inFile, 'r') as f:
         lines = f.readlines()
 
-    pairs = []
-    try:
-        pairs = [l.strip().split(' ') for l in lines]
-    except:
-        print('Invalid input file format')
+    pairs = [l.strip().split(' ') for l in lines]
     
     processed = []
     total = 0
 
     for p in pairs:
+
+        if p[0] not in reservations:
+            reservations.add(p[0])
+        else:
+            print('Error: Duplicate reservation')
+            quit()
+        
         seats = getSeats(p)
+        
         if seats is not None:
             processed.append(seats)
             total += int(p[1])
@@ -83,14 +89,21 @@ def run(inFile):
                 print(str(s) + ' ', end='')
         print('')
 
+    ab = os.path.abspath(__file__)
+    print('\n\nOutput can be found in: ' + os.path.dirname(ab) + '/output.txt')
+
 
 
 def getSeats(pair):
     # ! Stategy:
     # * Check in reverse order (back to front for available rows - skip odd rows to allow for 1 row buffer)
     # * Starting from the beginning of that row, check for next available seat (space by 3's)
-    
+    if len(pair) != 2:
+        print('Invalid input file format')
+        quit()
+
     num = int(pair[1])
+    
     for x in range(len(mapTheater)-1, -1, -2):
         y = 0
         
@@ -114,9 +127,6 @@ def getSeats(pair):
                         seatList += str(rows[x]) + str(y+counter+1) + ', '
                         counter += 1
                     return (pair[0], seatList[:-2])
-                else:
-                    print('here')
-                    y = y + counter + 3
             else:
                 while y + counter < SEATS and mapTheater[x][y + counter] == 1:
                     counter += 1
